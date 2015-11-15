@@ -6,6 +6,9 @@
 
 #include <iostream>
 
+//#define _DEBUG
+#define _INFO
+
 #define FATAL(x) { cerr << x << endl; exit(1); }
 
 void SeedPack::Handle(string no) {
@@ -15,12 +18,16 @@ void SeedPack::Handle(string no) {
 
     mOutput = new ofstream("./output/ans" + no + ".txt");
 
+#ifdef _INFO
     cout << "EXPECT: " << getProductSize() / getBoxSize() << endl;
+#endif
 
     //writeAnswer('A', 1, 'X', 1, 0, 0, 0, 3, 4, 5);
     place();
 
+#ifdef _INFO
     cout << "RESULT: " << (double) mProductSize / (double) mBoxSize << endl;
+#endif
 
 }
 
@@ -206,7 +213,9 @@ void SeedPack::place() {
 
     while((box = getLargestBox()) != 0) {
 
-        //cout << "INFO_BOX_LENGTH: " << box->Length << endl;
+#ifdef _DEBUG
+        cout << "DEBUG_BOX_LENGTH: " << box->Length << endl;
+#endif
 
         xBase = xBaseNext = 0;
         yBase = yBaseNext = 0;
@@ -217,7 +226,9 @@ void SeedPack::place() {
             SeedProduct* product = getSuitableProduct(box, xBase, yBase, zBase, xSize, ySize, zSize);
             if(product == 0) {
 
-                //cout << "INFO_NO_SUITABLE_PRODUCT" << endl;
+#ifdef _DEBUG
+                cout << "DEBUG_NO_SUITABLE_PRODUCT" << endl;
+#endif
                 blocking++;
 
                 switch(blocking) {
@@ -246,7 +257,9 @@ void SeedPack::place() {
             writeAnswer(product->Type, product->Count, box->Type, box->Count, xBase, yBase, zBase, xSize, ySize, zSize);
 
             product->Count--;
+#ifdef _INFO
             mProductSize += product->Length * product->Width * product->Height;
+#endif
 
             // TODO: Base.
 
@@ -261,7 +274,9 @@ void SeedPack::place() {
         END_PLACE:
 
         box->Count--;
+#ifdef _INFO
         mBoxSize += box->Length * box->Width * box->Height;
+#endif
 
         if(getProductCount() == 0) break;
 
@@ -270,6 +285,8 @@ void SeedPack::place() {
     if(box == 0) cerr << "WARNING_NO_BOX" << endl;
 
     cout << "INFO_BOX_REMAINING: " << getBoxCount() << endl;
+
+    cout << "Done." << endl;
 
 }
 
