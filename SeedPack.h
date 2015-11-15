@@ -29,10 +29,20 @@ public:
 
 private:
 
-    ofstream* mOutput;
+    long mBoxSize = 0;
+    long mProductSize = 0;
+
+    ofstream* mOutput = 0;
 
     void readBox(string no);
     void readProduct(string no);
+    SeedBox* getLargestBox();
+    SeedProduct* getSuitableProduct(SeedBox* box, int xBase, int yBase, int zBase, int& xSize, int& ySize, int& zSize);
+    double getBoxSize();
+    double getProductSize();
+    int getBoxCount();
+    int getProductCount();
+    void place();
     void writeAnswer(char productType, int productId, char boxType, int boxId, int x, int y, int z, int xSize, int ySize, int zSize);
 
 };
