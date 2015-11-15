@@ -11,9 +11,9 @@ class SeedProduct {
 public:
 
     char Type = 0;
-    int X = 0;
-    int Y = 0;
-    int Z = 0;
+    int Length = 0;
+    int Width = 0;
+    int Height = 0;
     int Count = 0;
 
 };

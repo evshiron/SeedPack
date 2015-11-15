@@ -7,6 +7,7 @@
 
 #include <list>
 #include <string>
+#include <fstream>
 
 #include "SeedBox.h"
 #include "SeedProduct.h"
@@ -21,7 +22,18 @@ public:
     list<SeedProduct*> Products;
 
     SeedPack() {};
+
     void Handle(string no);
+
+    ~SeedPack();
+
+private:
+
+    ofstream* mOutput;
+
+    void readBox(string no);
+    void readProduct(string no);
+    void writeAnswer(char productType, int productId, char boxType, int boxId, int x, int y, int z, int xSize, int ySize, int zSize);
 
 };
 
