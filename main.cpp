@@ -8,20 +8,36 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char** argv) {
 
-    cout << "Hello, World!" << endl;
+    //cout << "Hello, World!" << endl;
 
-    string no;
+    if(argc > 1) {
 
-    while(true) {
+        for(int i = 1; i < argc; i++) {
 
-        cin >> no;
+            cout << "Handling " << argv[i] << "." << endl;
 
-        cout << "Handling " << no << "." << endl;
+            SeedPack pack;
+            pack.Handle(string(argv[i]));
 
-        SeedPack pack;
-        pack.Handle(no);
+        }
+
+    }
+    else {
+
+        string no;
+
+        while(true) {
+
+            cin >> no;
+
+            cout << "Handling " << no << "." << endl;
+
+            SeedPack pack;
+            pack.Handle(no);
+
+        }
 
     }
 
